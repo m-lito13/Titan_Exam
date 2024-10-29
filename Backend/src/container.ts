@@ -6,7 +6,7 @@ import { OrdersServiceImpl } from "./services/impl/OrdersServiceImpl";
 import { OrdersRepositoryImpl } from "./repository/impl/OrdersRepositoryImpl";
 import { OrderRequestValidatorImpl } from "./validators/impl/OrderRequestValidatorImpl";
 export const loadContainer = (app: Application) => {
-    console.log('LOad container called');
+    console.log('Load container called');
     const Container = createContainer({
         injectionMode: 'CLASSIC'
     });
