@@ -12,6 +12,7 @@
   "author": "Michael Litovsky",
   "license": "ISC",
   "dependencies": {
+    "@tsed/exceptions": "^7.84.0",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.0",
     "@types/mysql": "^2.15.26",

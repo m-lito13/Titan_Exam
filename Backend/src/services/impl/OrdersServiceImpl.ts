@@ -7,7 +7,7 @@ export class OrdersServiceImpl implements OrdersService {
     constructor(ordersRepository : OrdersRepository) { 
         this.ordersRepository = ordersRepository;
     }
-    async createOrder(orderData: OrderParams): Promise<any> {
+    async createOrder(orderData: OrderParams): Promise<OrderParams> {
         console.log('Create order called');
         return this.ordersRepository.createOrder(orderData);
         

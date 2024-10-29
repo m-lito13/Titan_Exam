@@ -9,41 +9,39 @@ export class OrdersRepositoryImpl implements OrdersRepository {
         
     }
     async createOrder(orderParams: OrderParams): Promise<OrderParams> {
-        await this.initConnection();
+        await this.connect();
         let valuesToAdd = `'${orderParams.email}', '${orderParams.fullName}', '${orderParams.userName}' ,'${orderParams.fullAddress}', '${orderParams.colorFrame}', '${orderParams.imageUrls}'`;
         let  insertCommand = `INSERT into orders(email, fullName, userName, fullAddress, colorFrame, imageUrls) VALUES(${valuesToAdd});`;
         console.log('Command : '+insertCommand);
         
         try { 
             const result = await this.dbConnection.execute(insertCommand);
-            console.log(`Total rows inserted : ${result.rowCount}`);
             await this.dbConnection.end();
         }
         catch(Err) { 
-            console.log(Err);
+            console.error(Err);
+            throw Err; 
         }
         
         return orderParams;
     }
     async getOrders(userName : string): Promise<OrderParams[]> {
-        await this.initConnection();
-        let result : OrderParams [] = [];
+        await this.connect();
         try{
-            let query = `select * from orders where userName='${userName}'`;
+            let query : string= `select * from orders where userName=?`;
             console.log('select quesry: '+query);
-            let [recordsFromDb] = await this.dbConnection.execute(query);
+            let [recordsFromDb] = await this.dbConnection.execute(query, [userName]);
             this.dbConnection.end();
-            result  = recordsFromDb.map(this.GetOrderItemFromRecord);
+            let result  = recordsFromDb.map(this.GetOrderItemFromRecord);
             return result;
         }
         catch(Err) { 
-            console.log(Err);
+            console.error(Err);
+            throw Err;
         }
-
-        return result;
     }
 
-    async initConnection() {
+    private async connect() {
         let configData = {
             host     : process.env.DB_HOST,
             user     : process.env.DB_USER,
@@ -58,7 +56,7 @@ export class OrdersRepositoryImpl implements OrdersRepository {
         }
         catch(err : any ) {
             console.error('error connecting: ' + err.stack);
-            return;
+            throw err;
         } 
         console.log('connected OK');     
     }

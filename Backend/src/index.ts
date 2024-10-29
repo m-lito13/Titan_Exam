@@ -4,13 +4,11 @@ import { loadContainer } from './container';
 import dotenv from "dotenv";
 import PhotosRoute from "./routes/PhotosRoute";
 import OrdersRoute from "./routes/OrdersRoute";
-
-
-//import swaggerOutput from "./swagger_output.json";
+import { ErrorHandlerMiddleware } from "./middlewares/Errorhandlermiddleware";
 
 dotenv.config()
 
-let app_port = process.env.APP_PORT ? process.env.APP_PORT : 3001; 
+let app_port = process.env.APP_USE_PORT ? process.env.APP_USE_PORT : 3001; 
 console.log('port is'+ app_port);
 
 const app: express.Application = express();
@@ -20,9 +18,8 @@ loadContainer(app);
 app.use('/api/photos', PhotosRoute);
 app.use('/api/orders', OrdersRoute);
 
-//app.use(errorHandlerMiddleware);
+app.use(ErrorHandlerMiddleware);
 
 app.listen(app_port, () => {
-    console.log('port is'+ app_port);
     console.log(`Server is running on port ${app_port}`);
 });
