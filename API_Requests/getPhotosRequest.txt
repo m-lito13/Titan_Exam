@@ -1,0 +1,2 @@
+curl --location --request GET 'localhost:3001/api/photos?number=10' \
+--header 'User-Agent: Apidog/1.0.0 (https://apidog.com)'

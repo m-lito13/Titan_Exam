@@ -1,0 +1,4 @@
+curl --location --request GET 'localhost:3001/api/orders?username=user13' \
+--header 'User-Agent: Apidog/1.0.0 (https://apidog.com)' \
+--header 'Content-Type: application/json' \
+--data-raw ''

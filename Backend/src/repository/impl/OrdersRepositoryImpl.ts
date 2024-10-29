@@ -29,7 +29,6 @@ export class OrdersRepositoryImpl implements OrdersRepository {
         await this.connect();
         try{
             let query : string= `select * from orders where userName=?`;
-            console.log('select quesry: '+query);
             let [recordsFromDb] = await this.dbConnection.execute(query, [userName]);
             this.dbConnection.end();
             let result  = recordsFromDb.map(this.GetOrderItemFromRecord);

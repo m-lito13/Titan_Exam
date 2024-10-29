@@ -9,7 +9,6 @@ import { ErrorHandlerMiddleware } from "./middlewares/Errorhandlermiddleware";
 dotenv.config()
 
 let app_port = process.env.APP_USE_PORT ? process.env.APP_USE_PORT : 3001; 
-console.log('port is'+ app_port);
 
 const app: express.Application = express();
 app.use(express.json());

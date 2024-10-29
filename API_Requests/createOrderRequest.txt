@@ -1,0 +1,5 @@
+curl --location --request POST 'localhost:3001/api/orders' \
+--header 'User-Agent: Apidog/1.0.0 (https://apidog.com)' \
+--header 'Content-Type: application/json' \
+--data-raw '{"email":"test@mail.ru", "fullName" : "test user", "fullAddress":"test street; testcity", "imageUrls":"url1, url2, url3"
+, "colorFrame" : "red", "userName": "user1555"}'
