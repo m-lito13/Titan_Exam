@@ -1,8 +1,6 @@
 import { PhotoData } from "../PhotoData";
 import { PhotosService } from "../PhotosService";
 
-const PHOTOS_URL_BASE = 'https://pixabay.com/api';
-const API_KEY = '45640711-3b2c9c3e0dd9ac6e6a5b798be';
 
 export class PhotosServiceImpl implements PhotosService {
     async getPhotos(numberOfPhotos: number) : Promise<PhotoData[]> {
@@ -11,7 +9,9 @@ export class PhotosServiceImpl implements PhotosService {
     } 
 
     async getPhotosInternal(numberOfPhotos : number) : Promise<PhotoData[]> { 
-        let urlString = `${PHOTOS_URL_BASE}/?key=${API_KEY}`;
+        console.log('key: ' +process.env.API_KEY);
+        console.log('url: ' +process.env.PIC_API_URL);
+        let urlString = `${process.env.PIC_API_URL}/?key=${process.env.API_KEY}`;
         console.log(urlString);
         let response = await fetch(urlString);
         let picData = await response.json();

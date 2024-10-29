@@ -15,7 +15,7 @@ export class PhotosController {
 
 
     @GET()
-    async getTodos(req: Request, res: Response) {
+    async getPhotos(req: Request, res: Response) {
         let num : number = Number(req.query.number);
         console.log('num is '+num);
         let result : PhotoData[] = await this.photosService.getPhotos(num);
